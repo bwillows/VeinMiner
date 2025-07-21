@@ -1,0 +1,36 @@
+enabled: true
+
+shiftToBreak: true
+
+maxBlocks: 64
+maxRange: 16
+
+# Whether veinviner should respect tool durability
+consumeDurability: true
+
+# Whether a permission should be required to use VeinMiner
+permission:
+  enabled: true
+  node: "veinminer.use"
+
+# Delay ( in-ticks ) between breaking adjacent blocks
+breakDelay: 1
+
+breakSound:
+  enabled: true
+  # Update to "BLOCK_STONE_BREAK" or as desired on 1.13+
+  sound: "DIG_STONE"
+  volume: 1.0
+  pitch: 1.0
+
+# veinminer blocks
+blocks:
+  - "COAL_ORE"
+  - "IRON_ORE"
+  - "GOLD_ORE"
+  - "REDSTONE_ORE"
+  - "LAPIS_ORE"
+  - "DIAMOND_ORE"
+  - "EMERALD_ORE"
+
+bStats: true

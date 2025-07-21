@@ -1,0 +1,16 @@
+no-permission: "&cYou do not have permission to use this command."
+reload: "&aSuccesfully reloaded VeinMiner"
+
+# Internal
+
+version: "%version%"
+
+no-argument:
+  - "&aVeinMiner %version% by Brooke Willows"
+  - "&aUse \"/veinminer help\" for a list of commands"
+invalid-argument:
+  - "&cInvalid argument, try \"/veinminer help\"?"
+help:
+  - "&e/veinminer help&r &7&o( currently viewing )"
+  - "&e/veinminer reload&r &7- reload the plugin"
+  - "&e/veinminer version&r &7- view the plugin version"

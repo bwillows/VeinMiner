@@ -1,0 +1,19 @@
+name: VeinMiner
+version: '${project.version}'
+main: bwillows.veinminer.VeinMiner
+api-version: 1.13
+authors: [bwillows]
+softdepend:
+  - WorldGuard
+description: VeinMiner for 1.8+
+commands:
+  veinminer:
+    description: Main command for VeinMiner
+    aliases:
+permissions:
+  veinminer.*:
+    description: Gives access to all the commands.
+    default: op
+  veinminer.use:
+    description: Allows the use of VeinMiner
+    default: true
