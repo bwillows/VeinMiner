@@ -97,9 +97,8 @@ public class BlockBreakListener implements Listener {
                     ItemStack tool = null;
                     if(VeinMiner.IS_1_9) {
                         try {
-                            Method getItemInMainHand = Player.class.getMethod("getItemInMainHand");
-                            tool = (ItemStack) getItemInMainHand.invoke(player);
-                        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                            tool = player.getInventory().getItemInMainHand();
+                        } catch (Exception mostlyIgnored) {
                             Bukkit.getLogger().severe("[VeinMiner] Exception occurred while trying to get the item in hand");
                         }
                     } else {

@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Random;
 
 public class Utils {
@@ -139,5 +141,46 @@ public class Utils {
         }
 
         return true; // No empty slots found
+    }
+
+    /* added class and invocation attempt integrity checks due to experiencing ( 6.X )
+    WG may fail on initialization yet not disable itself leaving internal state null */
+
+    public static boolean WorldGuardIntegrityCheck(String version) {
+        try {
+            if (version.startsWith("6.")) {
+                Class<?> clazz = Class.forName("com.sk89q.worldguard.bukkit.WorldGuardPlugin");
+                Object wgPlugin = Bukkit.getPluginManager().getPlugin("WorldGuard");
+
+                if (wgPlugin == null || !clazz.isInstance(wgPlugin)) {
+                    return false;
+                }
+
+                Method getContainer = clazz.getMethod("getRegionContainer");
+                Object container = getContainer.invoke(wgPlugin);
+                if (container == null) {
+                    return false;
+                }
+
+                Field internalField = container.getClass().getDeclaredField("container");
+                internalField.setAccessible(true);
+                Object internal = internalField.get(container);
+                return internal != null;
+
+            } else if (version.startsWith("7.0")) {
+                Class<?> wgClass = Class.forName("com.sk89q.worldguard.WorldGuard");
+                Object instance = wgClass.getMethod("getInstance").invoke(null);
+                if (instance == null) return false;
+
+                Object platform = wgClass.getMethod("getPlatform").invoke(instance);
+                return platform != null;
+
+            } else {
+                return false;
+            }
+
+        } catch (Throwable ignored) {
+            return false;
+        }
     }
 }

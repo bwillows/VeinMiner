@@ -65,11 +65,23 @@ public class VeinMinerConfig {
         Settings.breakSound_enabled = configYml.getBoolean("breakSound.enabled");
         if(Settings.breakSound_enabled) {
             String breakSound_string = configYml.getString("breakSound.sound");
+
             if(breakSound_string == null) {
                 Bukkit.getLogger().warning("[VeinMiner] Invalid breakSound in config.yml");
                 Settings.breakSound_enabled = false;
             } else {
-                Sound breakSound_sound = Sound.valueOf(breakSound_string);
+                if(breakSound_string.equalsIgnoreCase("DIG_STONE") && VeinMiner.IS_1_9) {
+                    breakSound_string = "BLOCK_STONE_BREAK";
+                }
+
+                Sound breakSound_sound = null;
+
+                try {
+                    breakSound_sound = Sound.valueOf(breakSound_string);
+                } catch (IllegalArgumentException e) {
+
+                }
+
                 if(breakSound_sound == null) {
                     Bukkit.getLogger().warning("[VeinMiner] Invalid breakSound in config.yml");
                     Settings.breakSound_enabled = false;
