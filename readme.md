@@ -18,3 +18,6 @@ VeinMiner allows players to break adjacent ores and blocks by sneaking/shifting.
 ## Permissions
 - `veinminer.*`
 - `veinminer.use` - Allows the use of VeinMiner
+
+## Compiling 
+requires https://github.com/bwillows/worldguard-bridge
